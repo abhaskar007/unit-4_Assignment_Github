@@ -1,0 +1,654 @@
+PS C:\Users\Abhishek Bhaskar> mongo
+MongoDB shell version v5.0.6
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("a75ca985-4e50-466e-acfb-eed01a8fcde7") }
+MongoDB server version: 5.0.6
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2022-03-11T00:06:25.835+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+ show dbs
+CWHBlog  0.000GB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+> show collections
+> show dbs
+CWHBlog  0.000GB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+> use assignment
+switched to db assignment
+> db
+assignment
+> db.createCollection('users')
+{ "ok" : 1 }
+> show collections
+users
+> db.users.insert({"first_name" : "Abhishek",
+... ... "last_name" : "Bhaskar",
+... ... "email" : "abhaskar.bhaskar@gmail.com",
+... ... "ip_address": "192.168. 1.1",
+... ... "age": "25"})
+WriteResult({ "nInserted" : 1 })
+
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("622a620e35990b07b9ecbc3d"),
+        "first_name" : "Abhishek",
+        "last_name" : "Bhaskar",
+        "email" : "abhaskar.bhaskar@gmail.com",
+        "ip_address" : "192.168. 1.1",
+        "age" : "25"
+}
+>  db.users.insert({"first_name" : "Dhaval",
+... ... ... "last_name" : "chedha",
+... ... ... "email" : "dhavalr@gmail.com",
+... ... ... "ip_address": "192.178. 1.1",
+... ... ... "age": "35"})
+WriteResult({ "nInserted" : 1 })
+>  db.users.find().pretty()
+{
+        "_id" : ObjectId("622a620e35990b07b9ecbc3d"),
+        "first_name" : "Abhishek",
+        "last_name" : "Bhaskar",
+        "email" : "abhaskar.bhaskar@gmail.com",
+        "ip_address" : "192.168. 1.1",
+        "age" : "25"
+}
+{
+        "_id" : ObjectId("622a630835990b07b9ecbc3e"),
+        "first_name" : "Dhaval",
+        "last_name" : "chedha",
+        "email" : "dhavalr@gmail.com",
+        "ip_address" : "192.178. 1.1",
+        "age" : "35"
+}
+> db.users.insertMany([{"first_name" : "Nrupul",
+... ... ... ... "last_name" : "Kumar",
+... ... ... ... "email" : "nrpul@gmail.com",
+... ... ... ... "ip_address": "192.168. 1 ",
+... ... ... ... "age": "40"},
+... {"first_name" : "Prateek",
+... ... ... ... "last_name" : "Shukla",
+... ... ... ... "email" : "pshukla@gmail.com",
+... ... ... ... "ip_address": "192.168. 1.1 ",
+... ... ... ... "age": "32"},
+... {"first_name" : "Yogesh",
+... ... ... ... "last_name" : "Bhatt",
+... ... ... ... "email" : "ybhatt@gmail.com",
+... ... ... ... "ip_address": "192.178. 1 ",
+... ... ... ... "age": "40"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("622a647a35990b07b9ecbc3f"),
+                ObjectId("622a647a35990b07b9ecbc40"),
+                ObjectId("622a647a35990b07b9ecbc41")
+        ]
+}
+
+>  db.users.find().pretty()
+{
+        "_id" : ObjectId("622a620e35990b07b9ecbc3d"),
+        "first_name" : "Abhishek",
+        "last_name" : "Bhaskar",
+        "email" : "abhaskar.bhaskar@gmail.com",
+        "ip_address" : "192.168. 1.1",
+        "age" : "25"
+}
+{
+        "_id" : ObjectId("622a630835990b07b9ecbc3e"),
+        "first_name" : "Dhaval",
+        "last_name" : "chedha",
+        "email" : "dhavalr@gmail.com",
+        "ip_address" : "192.178. 1.1",
+        "age" : "35"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc3f"),
+        "first_name" : "Nrupul",
+        "last_name" : "Kumar",
+        "email" : "nrpul@gmail.com",
+        "ip_address" : "192.168. 1 ",
+        "age" : "40"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc40"),
+        "first_name" : "Prateek",
+        "last_name" : "Shukla",
+        "email" : "pshukla@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "32"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc41"),
+        "first_name" : "Yogesh",
+        "last_name" : "Bhatt",
+        "email" : "ybhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "40"
+}
+
+>  db.users.insertMany([{"first_name" : "Swannad",
+... ... ... ... ... "last_name" : "Kaddam",
+... ... ... ... ... "email" : "pablopandey@gmail.com",
+... ... ... ... ... "ip_address": "192.168. 1.1 ",
+... ... ... ... ... "age": "30"},
+... ... {"first_name" : "Ankush",
+... ... ... ... ... "last_name" : "Cheddha",
+... ... ... ... ... "email" : "ankush@gmail.com",
+... ... ... ... ... "ip_address": "192.168. 1.1 ",
+... ... ... ... ... "age": "28"},
+... ... {"first_name" : "Varun",
+... ... ... ... ... "last_name" : "Bhatt",
+... ... ... ... ... "email" : "varun_bhatt@gmail.com",
+... ... ... ... ... "ip_address": "192.178. 1 ",
+... ... ... ... ... "age": "30"},
+...  {"first_name" : "Arjun",
+... ... ... ... ... "last_name" : "Kumar",
+... ... ... ... ... "email" : "akumar@gmail.com",
+... ... ... ... ... "ip_address": "192.178. 1 ",
+... ... ... ... ... "age": "33"},
+...  {"first_name" : "Arushi",
+... ... ... ... ... "last_name" : "Nagar",
+... ... ... ... ... "email" : "arushi_nagar@gmail.com",
+... ... ... ... ... "ip_address": "192.178. 1.1 ",
+... ... ... ... ... "age": "32"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("622a666735990b07b9ecbc42"),
+                ObjectId("622a666735990b07b9ecbc43"),
+                ObjectId("622a666735990b07b9ecbc44"),
+                ObjectId("622a666735990b07b9ecbc45"),
+                ObjectId("622a666735990b07b9ecbc46")
+        ]
+}
+>  db.users.find().pretty()
+{
+        "_id" : ObjectId("622a620e35990b07b9ecbc3d"),
+        "first_name" : "Abhishek",
+        "last_name" : "Bhaskar",
+        "email" : "abhaskar.bhaskar@gmail.com",
+        "ip_address" : "192.168. 1.1",
+        "age" : "25"
+}
+{
+        "_id" : ObjectId("622a630835990b07b9ecbc3e"),
+        "first_name" : "Dhaval",
+        "last_name" : "chedha",
+        "email" : "dhavalr@gmail.com",
+        "ip_address" : "192.178. 1.1",
+        "age" : "35"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc3f"),
+        "first_name" : "Nrupul",
+        "last_name" : "Kumar",
+        "email" : "nrpul@gmail.com",
+        "ip_address" : "192.168. 1 ",
+        "age" : "40"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc40"),
+        "first_name" : "Prateek",
+        "last_name" : "Shukla",
+        "email" : "pshukla@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "32"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc41"),
+        "first_name" : "Yogesh",
+        "last_name" : "Bhatt",
+        "email" : "ybhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "40"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc42"),
+        "first_name" : "Swannad",
+        "last_name" : "Kaddam",
+        "email" : "pablopandey@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "30"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc43"),
+        "first_name" : "Ankush",
+        "last_name" : "Cheddha",
+        "email" : "ankush@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "28"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc44"),
+        "first_name" : "Varun",
+        "last_name" : "Bhatt",
+        "email" : "varun_bhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "30"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc45"),
+        "first_name" : "Arjun",
+        "last_name" : "Kumar",
+        "email" : "akumar@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "33"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc46"),
+        "first_name" : "Arushi",
+        "last_name" : "Nagar",
+        "email" : "arushi_nagar@gmail.com",
+        "ip_address" : "192.178. 1.1 ",
+        "age" : "32"
+}
+> db.users.find({email:"abhaskar.bhaskar@gmail.com"})
+{ "_id" : ObjectId("622a620e35990b07b9ecbc3d"), "first_name" : "Abhishek", "last_name" : "Bhaskar", "email" : "abhaskar.bhaskar@gmail.com", "ip_address" : "192.168. 1.1", "age" : "25" }
+
+
+> db.users.find({"last_name":"Kaddam"})
+{ "_id" : ObjectId("622a666735990b07b9ecbc42"), "first_name" : "Swannad", "last_name" : "Kaddam", "email" : "pablopandey@gmail.com", "ip_address" : "192.168. 1.1 ", "age" : "30" }
+
+
+> db.users.find({"ip_address":"192.178. 1.1"})
+{ "_id" : ObjectId("622a630835990b07b9ecbc3e"), "first_name" : "Dhaval", "last_name" : "chedha", "email" : "dhavalr@gmail.com", "ip_address" : "192.178. 1.1", "age" : "35" }
+
+
+> db.users.find({"ip_address":"192.178. 1.1"}).limit(9)
+{ "_id" : ObjectId("622a630835990b07b9ecbc3e"), "first_name" : "Dhaval", "last_name" : "chedha", "email" : "dhavalr@gmail.com", "ip_address" : "192.178. 1.1", "age" : "35" }
+
+
+> db.users.find({last_name: "Bhatt"})
+{ "_id" : ObjectId("622a647a35990b07b9ecbc41"), "first_name" : "Yogesh", "last_name" : "Bhatt", "email" : "ybhatt@gmail.com", "ip_address" : "192.178. 1 ", "age" : "40" }
+{ "_id" : ObjectId("622a666735990b07b9ecbc44"), "first_name" : "Varun", "last_name" : "Bhatt", "email" : "varun_bhatt@gmail.com", "ip_address" : "192.178. 1 ", "age" : "30" }
+
+ db.users.findOne({last_name:"Kumar"})
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc3f"),
+        "first_name" : "Nrupul",
+        "last_name" : "Kumar",
+        "email" : "nrpul@gmail.com",
+        "ip_address" : "192.168. 1 ",
+        "age" : "40"
+
+
+db.users.update({"first_name" : "Nrupul",
+        "last_name" : "Kumar",
+        "email" : "nrpul@gmail.com",
+        "ip_address" : "192.168. 1 ",
+        "age" : "40"}, {Developer: true}))
+}
+
+> db.users.update({"first_name" : "Nrupul"},{$set:{'title':'New MongoDB Tutorial'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("622a6e2ed983c8a0c9f836cc"),
+        "first_name" : "Swannad",
+        "last_name" : "Kaddam",
+        "email" : "pablopandey@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "30"
+}
+{
+        "_id" : ObjectId("622a6e2ed983c8a0c9f836cd"),
+        "first_name" : "Ankush",
+        "last_name" : "Cheddha",
+        "email" : "ankush@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "28"
+}
+{
+        "_id" : ObjectId("622a6e2ed983c8a0c9f836ce"),
+        "first_name" : "Varun",
+        "last_name" : "Bhatt",
+        "email" : "varun_bhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "30"
+}
+{
+        "_id" : ObjectId("622a6e2ed983c8a0c9f836cf"),
+        "first_name" : "Arjun",
+        "last_name" : "Kumar",
+        "email" : "akumar@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "33"
+}
+{
+        "_id" : ObjectId("622a6e2ed983c8a0c9f836d0"),
+        "first_name" : "Arushi",
+        "last_name" : "Nagar",
+        "email" : "arushi_nagar@gmail.com",
+        "ip_address" : "192.178. 1.1 ",
+        "age" : "32"
+}
+{
+        "_id" : ObjectId("622a6e58d983c8a0c9f836d1"),
+        "first_name" : "Nrupul",
+        "last_name" : "Kumar",
+        "email" : "nrpul@gmail.com",
+        "ip_address" : "192.168. 1 ",
+        "age" : "40",
+        "title" : "New MongoDB Tutorial"
+}
+{
+        "_id" : ObjectId("622a6e58d983c8a0c9f836d2"),
+        "first_name" : "Prateek",
+        "last_name" : "Shukla",
+        "email" : "pshukla@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "32"
+}
+{
+        "_id" : ObjectId("622a6e58d983c8a0c9f836d3"),
+        "first_name" : "Yogesh",
+        "last_name" : "Bhatt",
+        "email" : "ybhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "40"
+}
+{
+        "_id" : ObjectId("622a6e7fd983c8a0c9f836d4"),
+        "first_name" : "Dhaval",
+        "last_name" : "chedha",
+        "email" : "dhavalr@gmail.com",
+        "ip_address" : "192.178. 1.1",
+        "age" : "35"
+}
+{
+        "_id" : ObjectId("622a6e99d983c8a0c9f836d5"),
+        "first_name" : "Abhishek",
+        "last_name" : "Bhaskar",
+        "email" : "abhaskar.bhaskar@gmail.com",
+        "ip_address" : "192.168. 1.1",
+        "age" : "25"
+}
+
+> db.users.updateMany({last_name: "Bhatt"}, {$set:{comapny: "MASAI"}})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("622a620e35990b07b9ecbc3d"),
+        "first_name" : "Abhishek",
+        "last_name" : "Bhaskar",
+        "email" : "abhaskar.bhaskar@gmail.com",
+        "ip_address" : "192.168. 1.1",
+        "age" : "25"
+}
+{
+        "_id" : ObjectId("622a630835990b07b9ecbc3e"),
+        "first_name" : "Dhaval",
+        "last_name" : "chedha",
+        "email" : "dhavalr@gmail.com",
+        "ip_address" : "192.178. 1.1",
+        "age" : "35"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc3f"),
+        "first_name" : "Nrupul",
+        "last_name" : "Kumar",
+        "email" : "nrpul@gmail.com",
+        "ip_address" : "192.168. 1 ",
+        "age" : "40"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc40"),
+        "first_name" : "Prateek",
+        "last_name" : "Shukla",
+        "email" : "pshukla@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "32"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc41"),
+        "first_name" : "Yogesh",
+        "last_name" : "Bhatt",
+        "email" : "ybhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "40",
+        "comapny" : "MASAI"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc42"),
+        "first_name" : "Swannad",
+        "last_name" : "Kaddam",
+        "email" : "pablopandey@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "30"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc43"),
+        "first_name" : "Ankush",
+        "last_name" : "Cheddha",
+        "email" : "ankush@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "28"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc44"),
+        "first_name" : "Varun",
+        "last_name" : "Bhatt",
+        "email" : "varun_bhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "30",
+        "comapny" : "MASAI"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc45"),
+        "first_name" : "Arjun",
+        "last_name" : "Kumar",
+        "email" : "akumar@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "33"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc46"),
+        "first_name" : "Arushi",
+        "last_name" : "Nagar",
+        "email" : "arushi_nagar@gmail.com",
+        "ip_address" : "192.178. 1.1 ",
+        "age" : "32"
+}
+
+> db.users.deleteMany({ip_address:"192.178. 1.1"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("622a620e35990b07b9ecbc3d"),
+        "first_name" : "Abhishek",
+        "last_name" : "Bhaskar",
+        "email" : "abhaskar.bhaskar@gmail.com",
+        "ip_address" : "192.168. 1.1",
+        "age" : "25"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc3f"),
+        "first_name" : "Nrupul",
+        "last_name" : "Kumar",
+        "email" : "nrpul@gmail.com",
+        "ip_address" : "192.168. 1 ",
+        "age" : "40"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc40"),
+        "first_name" : "Prateek",
+        "last_name" : "Shukla",
+        "email" : "pshukla@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "32"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc41"),
+        "first_name" : "Yogesh",
+        "last_name" : "Bhatt",
+        "email" : "ybhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "40",
+        "comapny" : "MASAI"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc42"),
+        "first_name" : "Swannad",
+        "last_name" : "Kaddam",
+        "email" : "pablopandey@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "30"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc43"),
+        "first_name" : "Ankush",
+        "last_name" : "Cheddha",
+        "email" : "ankush@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "28"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc44"),
+        "first_name" : "Varun",
+        "last_name" : "Bhatt",
+        "email" : "varun_bhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "30",
+        "comapny" : "MASAI"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc46"),
+        "first_name" : "Arushi",
+        "last_name" : "Nagar",
+        "email" : "arushi_nagar@gmail.com",
+        "ip_address" : "192.178. 1.1 ",
+        "age" : "32"
+}
+> db.users.deleteMany({age:"40"})
+{ "acknowledged" : true, "deletedCount" : 2 }
+> db.users.find().pretty()
+{
+        "_id" : ObjectId("622a620e35990b07b9ecbc3d"),
+        "first_name" : "Abhishek",
+        "last_name" : "Bhaskar",
+        "email" : "abhaskar.bhaskar@gmail.com",
+        "ip_address" : "192.168. 1.1",
+        "age" : "25"
+}
+{
+        "_id" : ObjectId("622a647a35990b07b9ecbc40"),
+        "first_name" : "Prateek",
+        "last_name" : "Shukla",
+        "email" : "pshukla@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "32"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc42"),
+        "first_name" : "Swannad",
+        "last_name" : "Kaddam",
+        "email" : "pablopandey@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "30"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc43"),
+        "first_name" : "Ankush",
+        "last_name" : "Cheddha",
+        "email" : "ankush@gmail.com",
+        "ip_address" : "192.168. 1.1 ",
+        "age" : "28"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc44"),
+        "first_name" : "Varun",
+        "last_name" : "Bhatt",
+        "email" : "varun_bhatt@gmail.com",
+        "ip_address" : "192.178. 1 ",
+        "age" : "30",
+        "comapny" : "MASAI"
+}
+{
+        "_id" : ObjectId("622a666735990b07b9ecbc46"),
+        "first_name" : "Arushi",
+        "last_name" : "Nagar",
+        "email" : "arushi_nagar@gmail.com",
+        "ip_address" : "192.178. 1.1 ",
+        "age" : "32"
+}
+
+
+> db.dropDatabase()
+{ "ok" : 1 }
+> db.dropDatabase()
+{ "ok" : 1 }
+> db
+assignment
+> show dbs
+CWHBlog  0.000GB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+users    0.000GB
+> db.users.find().pretty()
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
